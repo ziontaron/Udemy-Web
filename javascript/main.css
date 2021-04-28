@@ -1,0 +1,16 @@
+.flex {
+  display: flex;
+  flex-flow: row wrap;
+  height: 200px;
+}
+.primero {
+  flex-grow: 1;
+  flex-basis: 120px;
+}
+.segundo {
+  flex-grow: 2;
+}
+.tercero {
+  flex-grow: 2;
+  align-self: center;
+}

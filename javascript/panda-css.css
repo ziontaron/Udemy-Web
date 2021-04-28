@@ -1,0 +1,139 @@
+body {
+  background-color: #eeeeee;
+}
+.panda-nav ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  overflow: hiden;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #333333;
+}
+.panda-nav ul li {
+  float: left;
+}
+.panda-nav ul li a {
+  display: block;
+  color: white;
+  text-align: center;
+  padding: 14px;
+  text-decoration: none;
+}
+.panda-nav ul li :hover {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+.activo {
+  background-color: #4a78cc;
+}
+.activo a {
+  color: black;
+}
+.content {
+  margin-top: 50px;
+}
+.panda-dropdown {
+  position: relative;
+  display: inline-block;
+}
+.panda-dropdown-btn {
+  background-color: #4caf50;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+}
+.panda-dropdown-cont {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.3);
+  margin-left: 60px;
+}
+.panda-dropdown-cont a {
+  display: block;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+}
+.panda-dropdown-cont a:hover {
+  background-color: #f1f1f1;
+}
+.panda-dropdown:hover .panda-dropdown-btn {
+  background-color: #3e8e41;
+}
+.panda-dropdown:hover .panda-dropdown-cont {
+  display: block;
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0px;
+  display: inline-block;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+input[type="submit"] {
+  width: 100%;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px 20px;
+  margin: 8px 0px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.panda-form {
+  background-color: white;
+  padding: 20px 12px;
+  border-radius: 4px;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+}
+
+textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0px;
+  display: inline-block;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+.panda-table {
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
+table {
+  padding: 2px;
+  width: 100%;
+  background-color: white;
+  border-collapse: collapse;
+}
+
+td {
+  border: 1px solid #dddddd;
+  padding: 8px;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+table th {
+  background-color: #4caf50;
+  color: white;
+  text-align: left;
+  padding-top: 12px;
+  padding-right: 12px;
+  padding-left: 8px;
+  padding-right: 8px;
+}
