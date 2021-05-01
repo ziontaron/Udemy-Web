@@ -1,4 +1,8 @@
 let mealsState = [];
+let ruta = "login";
+let user = {};
+let _token = {};
+
 const stringToHTML = (s) => {
   const parser = new DOMParser();
   const doc = parser.parseFromString(s, "text/html");
@@ -25,9 +29,7 @@ const renderOrder = (order, meals) => {
   return element;
 };
 
-window.onload = () => {
-  //console.log("Inicio Fetch");
-  //fetch("https://serverless-ziontaron.vercel.app/api/meals")
+const inicializaFormulario = () => {
   const orderForm = document.getElementById("order");
   orderForm.onsubmit = (e) => {
     e.preventDefault();
@@ -37,15 +39,16 @@ window.onload = () => {
     const mealIdValue = mealId.value;
     if (!mealIdValue) {
       alert("Debe seleccionar un plato");
+      submit.removeAttribute("disabled");
       return;
     }
     const order = {
       meal_id: mealIdValue,
-      user_id: "chanchito triste",
+      user_id: user._id,
     };
     fetch("http://localhost:3000/api/orders", {
       method: "POST",
-      headers: { "content-type": "application/json" },
+      headers: { "content-type": "application/json", authorization: _token },
       body: JSON.stringify(order),
     })
       .then((x) => x.json())
@@ -57,7 +60,8 @@ window.onload = () => {
         submit.removeAttribute("disabled");
       });
   };
-  //trae el menu
+};
+const inicializaDatos = () => {
   fetch("http://localhost:3000/api/meals")
     .then((response) => response.json())
     .then((data) => {
@@ -81,4 +85,64 @@ window.onload = () => {
           });
         });
     });
+};
+
+const renderApp = () => {
+  const token = localStorage.getItem("token");
+  if (token) {
+    user = JSON.parse(localStorage.getItem("user"));
+    _token = localStorage.getItem("token");
+    return renderOrders();
+  }
+  renderLogin();
+};
+
+const renderOrders = () => {
+  const ordersView = document.getElementById("orders-view");
+  document.getElementById("app").innerHTML = ordersView.innerHTML;
+  inicializaFormulario();
+  inicializaDatos();
+};
+
+const renderLogin = () => {
+  const loginTemplate = document.getElementById("login-template");
+  document.getElementById("app").innerHTML = loginTemplate.innerHTML;
+
+  const loginForm = document.getElementById("login-form");
+  loginForm.onsubmit = (e) => {
+    e.preventDefault();
+    const email = document.getElementById("email").value;
+    const password = document.getElementById("password").value;
+
+    fetch("http://localhost:3000/api/auth/login", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      //body: JSON.stringify({ email: email, password: password }),
+      body: JSON.stringify({ email: "chanchito@feliz.com", password: "123456" }),
+    })
+      .then((x) => x.json())
+      .then((respuesta) => {
+        //console.log(respuesta.token);
+        localStorage.setItem("token", respuesta.token);
+        _token = respuesta.token;
+        ruta = "orders";
+        return respuesta.token;
+      })
+      .then((token) => {
+        return fetch("http://localhost:3000/api/auth/me", {
+          method: "GET",
+          headers: { "content-type": "application/json", authorization: token },
+        });
+      })
+      .then((x) => x.json())
+      .then((fetchedUser) => {
+        localStorage.setItem("user", JSON.stringify(fetchedUser));
+        user = fetchedUser;
+        renderOrders();
+      });
+  };
+};
+
+window.onload = () => {
+  renderApp();
 };

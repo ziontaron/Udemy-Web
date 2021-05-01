@@ -27,5 +27,5 @@ const hasRoles = (roles) => (req, res, next) => {
 
 module.exports = {
   isAuthenticated,
-  hasRole,
+  hasRoles,
 };

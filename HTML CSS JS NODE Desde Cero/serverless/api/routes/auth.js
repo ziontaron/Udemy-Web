@@ -14,7 +14,7 @@ const signToken = (_id) => {
 };
 
 router.post("/register", (req, res) => {
-  res.send("soy registro");
+  //res.send("soy registro");
   const { email, password } = req.body;
   crypto.randomBytes(16, (err, salt) => {
     const newSalt = salt.toLocaleString("base64");
@@ -36,7 +36,8 @@ router.post("/register", (req, res) => {
 });
 
 router.post("/login", (req, res) => {
-  res.send("soy login");
+  //res.send("soy login");
+  const { email, password } = req.body;
   Users.findOne({ email })
     .exec()
     .then((user) => {
